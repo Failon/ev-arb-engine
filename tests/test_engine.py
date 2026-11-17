@@ -203,3 +203,72 @@ def test_reference_disagreement_diagnostics(quotes, at):
     assert edge["reference_probability_min"] < edge["reference_probability_max"]
     assert edge["reference_count"] == len(quotes) - 1
     assert edge["min_reference_conservative_ev"] <= edge["conservative_ev"]
+
+
+def test_reference_diagnostics_match_individual_devigged_sources(quotes, at):
+    results = analyze(quotes, at)
+    target = quotes[0]
+    references = [q for q in quotes if q.source != target.source]
+    probabilities = [devig([o.odds for o in q.outcomes], "power") for q in references]
+    for index, outcome in enumerate(target.outcomes):
+        edge = next(
+            row for row in results["ev"]
+            if row["source"] == target.source and row["outcome"] == outcome.name
+        )
+        values = [p[index] for p in probabilities]
+        assert edge["reference_count"] == 2
+        assert edge["reference_probability_min"] == pytest.approx(min(values))
+        assert edge["reference_probability_max"] == pytest.approx(max(values))
+        assert edge["fair_probability"] == pytest.approx(sum(values) / len(values))
+        assert edge["min_reference_conservative_ev"] == pytest.approx(
+            conservative_ev(outcome, min(values))
+        )
+        assert edge["references_agree_on_positive_ev"] is all(
+            conservative_ev(outcome, value) > 0 for value in values
+        )
+
+
+def test_future_and_superseded_prices_do_not_change_reference_diagnostics(quotes, at):
+    baseline = analyze(quotes, at)["ev"]
+    future = quotes[1].model_copy(
+        update={
+            "observed_at": at + timedelta(seconds=3),
+            "received_at": at + timedelta(seconds=3),
+            "outcomes": tuple(
+                o.model_copy(update={"odds": 100.0}) for o in quotes[1].outcomes
+            ),
+        }
+    )
+    delayed = quotes[1].model_copy(
+        update={
+            "observed_at": at - timedelta(seconds=10),
+            "received_at": at,
+            "outcomes": tuple(
+                o.model_copy(update={"odds": 100.0}) for o in quotes[1].outcomes
+            ),
+        }
+    )
+    assert analyze([*quotes, future, delayed], at)["ev"] == baseline
+
+
+def test_three_way_reference_diagnostics(quotes, at):
+    market = quotes[0].market.model_copy(
+        update={"outcomes": ("home", "draw", "away")}
+    )
+    prices = ((2.5, 3.2, 3.1), (2.8, 3.0, 2.9), (2.6, 3.4, 2.7))
+    three_way_quotes = [
+        q.model_copy(
+            update={
+                "market": market,
+                "outcomes": tuple(
+                    Outcome(name=name, odds=odd, liquidity=100)
+                    for name, odd in zip(market.outcomes, book_prices)
+                ),
+            }
+        )
+        for q, book_prices in zip(quotes, prices)
+    ]
+    result = analyze(three_way_quotes, at)
+    assert len(result["ev"]) == 9
+    assert all(item["reference_count"] == 2 for item in result["ev"])
+    assert {item["outcome"] for item in result["ev"]} == {"home", "draw", "away"}
