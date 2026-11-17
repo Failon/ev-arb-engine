@@ -65,7 +65,7 @@ async def test_collect_normalizes_audited_three_way_markets(payload, rules, tmp_
         return httpx.Response(200, json=payload)
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
-        with Journal(tmp_path / "quotes.db") as journal:
+        with Journal(str(tmp_path / "quotes.db")) as journal:
             quotes = await collector(client, journal, rules).collect()
     assert len(quotes) == 2
     assert {q.source for q in quotes} == {"odds-api-io:Stake", "odds-api-io:Parimatch UK"}
@@ -77,7 +77,7 @@ async def test_collect_normalizes_audited_three_way_markets(payload, rules, tmp_
 
 def test_rejects_ambiguous_or_stale_contract_inputs(payload, rules, tmp_path):
     received = datetime.now(UTC)
-    with Journal(tmp_path / "quotes.db") as journal:
+    with Journal(str(tmp_path / "quotes.db")) as journal:
         instance = collector(None, journal, rules)
         payload["bookmakers"]["Stake"][0].pop("updatedAt")
         with pytest.raises(ValueError, match="timestamp"):
@@ -93,7 +93,7 @@ def test_rejects_ambiguous_or_stale_contract_inputs(payload, rules, tmp_path):
 
 
 def test_requires_audited_rules_and_distinct_books(tmp_path, rules):
-    with Journal(tmp_path / "quotes.db") as journal:
+    with Journal(str(tmp_path / "quotes.db")) as journal:
         with pytest.raises(ValueError, match="audited"):
             OddsAPIIOCollector(None, "key", 123456, ("Stake",), {}, journal)
         with pytest.raises(ValueError, match="distinct"):
@@ -108,7 +108,7 @@ async def test_http_failures_do_not_leak_keys(status, rules, tmp_path):
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         with (
-            Journal(tmp_path / "quotes.db") as journal,
+            Journal(str(tmp_path / "quotes.db")) as journal,
             pytest.raises(RuntimeError, match=f"HTTP {status}") as exc,
         ):
             await collector(client, journal, rules).collect()
@@ -123,7 +123,7 @@ async def test_transport_failure_has_safe_error(rules, tmp_path):
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         with (
-            Journal(tmp_path / "quotes.db") as journal,
+            Journal(str(tmp_path / "quotes.db")) as journal,
             pytest.raises(RuntimeError, match="transport failure") as exc,
         ):
             await collector(client, journal, rules).collect()
