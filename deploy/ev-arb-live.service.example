@@ -1,0 +1,17 @@
+[Unit]
+Description=EV-ARB bounded live research trial
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/ev-arb-engine
+ExecStart=%h/ev-arb-engine/.venv/bin/ev-arb live-run --db %h/.local/state/ev-arb/live-trial.db --config %h/ev-arb-engine/config/free-trial.json --secrets-file %h/.config/ev-arb/keys.env
+Restart=on-failure
+RestartSec=60
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

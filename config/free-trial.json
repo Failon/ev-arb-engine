@@ -1,0 +1,12 @@
+{
+  "days": 3,
+  "interval_seconds": 3600,
+  "papi_budget": 200,
+  "odds_budget": 400,
+  "papi_tournament_id": null,
+  "odds_sport": "upcoming",
+  "max_age": 30,
+  "papi_books": {},
+  "odds_books": {},
+  "papi_market": null
+}
