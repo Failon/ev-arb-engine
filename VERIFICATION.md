@@ -41,3 +41,13 @@ unverified (TEST_POSTGRES_DSN absent). No live provider or Telegram calls.
 audited event/bookmaker mapping, duplicated-reseller consensus regression, changed
 metadata rejection, pre-match/rule validation and successful-response key echo
 redaction. All HTTP is mocked; no live provider subscription or PostgreSQL tested.
+
+## Autonomous scanner and paper ledger (#10)
+
+88 passed, 1 skipped; Ruff lint and format passed. scan-demo CLI: 3 synthetic
+signals, balance 1000, reserved 10, available 990. Tests cover source outages,
+quota/backoff, Retry-After, post-collection cutoff, future/stale snapshots,
+strict market grouping, two-book arb versus three-book EV, persistent reserves,
+win/loss/void and idempotent/conflicting settlement. Real feeds remain unverified;
+no real provider/Telegram requests, PostgreSQL skipped. Paper execution is an
+instantaneous scenario; latency/CLV remain in the existing historical replay.

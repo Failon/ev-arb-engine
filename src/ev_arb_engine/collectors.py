@@ -11,6 +11,12 @@ from .journal import Journal
 from .models import Event, Market, Outcome, Quote, SettlementRules
 
 
+class ProviderRateLimit(RuntimeError):
+    def __init__(self, retry_after: float = 3600):
+        self.retry_after = retry_after
+        super().__init__("provider HTTP 429; collection suspended")
+
+
 class Collector(Protocol):
     async def collect(self) -> list[Quote]: ...
 

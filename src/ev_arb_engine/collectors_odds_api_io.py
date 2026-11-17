@@ -5,11 +5,14 @@ No live calls are made unless an application explicitly instantiates and invokes
 """
 
 import json
+import math
 import re
 from datetime import UTC, datetime
+from email.utils import parsedate_to_datetime
 
 import httpx
 
+from .collectors import ProviderRateLimit
 from .journal import Journal
 from .models import Event, Market, Outcome, Quote, SettlementRules
 
@@ -60,6 +63,18 @@ class OddsAPIIOCollector:
         except httpx.RequestError:
             # Request objects and URLs can contain API secrets: never log or expose them.
             raise RuntimeError("Odds-API.io transport failure; no retry performed") from None
+        if response.status_code == 429:
+            try:
+                delay = float(response.headers.get("Retry-After", "3600"))
+                if not math.isfinite(delay) or delay < 0:
+                    delay = 3600
+            except ValueError:
+                try:
+                    reset = parsedate_to_datetime(response.headers.get("Retry-After", ""))
+                    delay = max(3600, (reset - datetime.now(UTC)).total_seconds())
+                except (ValueError, TypeError, OverflowError):
+                    delay = 3600
+            raise ProviderRateLimit(max(3600, delay))
         if response.status_code != 200:
             raise RuntimeError(f"Odds-API.io HTTP {response.status_code}; no retry performed")
         received = datetime.now(UTC)
