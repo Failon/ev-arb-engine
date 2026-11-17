@@ -4,6 +4,7 @@ Docs: https://feedback.odds-api.io/en/help/articles/6035212-understanding-the-ap
 No live calls are made unless an application explicitly instantiates and invokes it.
 """
 
+import json
 import re
 from datetime import UTC, datetime
 
@@ -35,6 +36,8 @@ class OddsAPIIOCollector:
             raise ValueError("invalid bookmaker identifier")
         if any(name not in rules for name in bookmakers):
             raise ValueError("missing audited settlement rules")
+        if len({rules[book] for book in bookmakers}) != 1:
+            raise ValueError("incompatible audited settlement rules")
         self.client = client
         self.api_key = api_key
         self.event_id = event_id
@@ -60,9 +63,14 @@ class OddsAPIIOCollector:
         if response.status_code != 200:
             raise RuntimeError(f"Odds-API.io HTTP {response.status_code}; no retry performed")
         received = datetime.now(UTC)
-        payload = response.json()
+        try:
+            # A provider may echo request credentials even in a successful response.
+            payload = json.loads(response.text.replace(self.api_key, "[REDACTED]"))
+            quotes = self.normalize(payload, received)
+        except (ValueError, TypeError, KeyError):
+            raise ValueError("invalid Odds-API.io response; normalization rejected") from None
         self.journal.append("odds-api-io", received, payload)
-        return self.normalize(payload, received)
+        return quotes
 
     def normalize(self, payload: dict, received: datetime) -> list[Quote]:
         """Fail closed for unknown/incomplete markets and missing source timestamps."""
@@ -76,6 +84,10 @@ class OddsAPIIOCollector:
             away=payload["away"],
             starts_at=payload["date"],
         )
+        if event.starts_at <= received:
+            raise ValueError("pre-match event required")
+        if payload.get("status", "pending") not in ("pending", "scheduled", "prematch"):
+            raise ValueError("unsupported event status")
         raw_books = payload["bookmakers"]
         if not isinstance(raw_books, dict):
             raise TypeError("invalid bookmakers payload")
