@@ -80,7 +80,7 @@ class OddsAPIIOCollector:
         )
         raw_books = payload["bookmakers"]
         if not isinstance(raw_books, dict):
-            raise ValueError("invalid bookmakers payload")
+            raise TypeError("invalid bookmakers payload")
         quotes: list[Quote] = []
         for book in self.bookmakers:
             markets = raw_books.get(book, [])
@@ -97,7 +97,7 @@ class OddsAPIIOCollector:
                 raise ValueError("ambiguous moneyline price set")
             values = options[0]
             if not isinstance(values, dict):
-                raise ValueError("invalid moneyline odds")
+                raise TypeError("invalid moneyline odds")
             keys = set(values) - {"href"}
             if keys not in ({"home", "away"}, {"home", "draw", "away"}):
                 raise ValueError("incomplete or unsupported moneyline outcomes")
