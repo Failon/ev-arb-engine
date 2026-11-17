@@ -117,8 +117,7 @@ class OddsAPIIOCollector:
                     observed_at=raw_market["updatedAt"],
                     received_at=received,
                     outcomes=tuple(
-                        Outcome(name=name, odds=float(values[name]), liquidity=0)
-                        for name in order
+                        Outcome(name=name, odds=float(values[name]), liquidity=0) for name in order
                     ),
                 )
             )
