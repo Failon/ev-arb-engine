@@ -23,6 +23,30 @@ async def run(args):
             [ResearchTrade.model_validate(t) for t in data["trades"]],
             [datetime.fromisoformat(t) for t in data["boundaries"]],
         )
+    if args.command == "scan-demo":
+        from .paper import PaperLedger
+        from .scanner import FeedSlot, ScanConfig, Scanner
+
+        feed = FixtureCollector(args.fixture)
+        quotes = await feed.collect()
+        at = max(q.received_at for q in quotes)
+        scanner = Scanner([FeedSlot("synthetic-fixture", feed)], ScanConfig())
+        batch = await scanner.tick(at)
+        ledger = PaperLedger(args.ledger)
+        try:
+            for signal in sorted(
+                batch["signals"], key=lambda s: s.detail.get("conservative_ev", -1), reverse=True
+            ):
+                ledger.open(signal)
+            return {
+                "mode": "synthetic-paper-demo",
+                "as_of": at.isoformat(),
+                "signals": [s.model_dump(mode="json") for s in batch["signals"]],
+                "health": batch["health"],
+                "account": ledger.balances(),
+            }
+        finally:
+            ledger.close()
     quotes = await FixtureCollector(args.fixture).collect()
     at = datetime.fromisoformat(args.at) if args.at else max(q.received_at for q in quotes)
     if args.journal:
@@ -45,6 +69,9 @@ def main():
     history.add_argument("fixture", type=Path)
     summary = sub.add_parser("report")
     summary.add_argument("fixture", type=Path)
+    scan_demo = sub.add_parser("scan-demo")
+    scan_demo.add_argument("fixture", type=Path)
+    scan_demo.add_argument("--ledger", default=":memory:", help="local paper-only SQLite ledger")
     args = parser.parse_args()
     try:
         print(json.dumps(asyncio.run(run(args)), indent=2, ensure_ascii=False, allow_nan=False))
