@@ -25,7 +25,10 @@ def devig(odds: list[float], method: str = "multiplicative") -> list[float]:
                 lo = mid
             else:
                 hi = mid
-        return [x ** ((lo + hi) / 2) for x in raw]
+        probabilities = [x ** ((lo + hi) / 2) for x in raw]
+        # Remove root-solver roundoff so symmetric fair prices remain exactly fair.
+        total = math.fsum(probabilities)
+        return [p / total for p in probabilities]
     raise ValueError("unknown devig method")
 
 
