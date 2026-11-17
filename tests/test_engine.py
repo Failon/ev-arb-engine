@@ -236,18 +236,14 @@ def test_future_and_superseded_prices_do_not_change_reference_diagnostics(quotes
         update={
             "observed_at": at + timedelta(seconds=3),
             "received_at": at + timedelta(seconds=3),
-            "outcomes": tuple(
-                o.model_copy(update={"odds": 100.0}) for o in quotes[1].outcomes
-            ),
+            "outcomes": tuple(o.model_copy(update={"odds": 100.0}) for o in quotes[1].outcomes),
         }
     )
     delayed = quotes[1].model_copy(
         update={
             "observed_at": at - timedelta(seconds=10),
             "received_at": at,
-            "outcomes": tuple(
-                o.model_copy(update={"odds": 100.0}) for o in quotes[1].outcomes
-            ),
+            "outcomes": tuple(o.model_copy(update={"odds": 100.0}) for o in quotes[1].outcomes),
         }
     )
     assert analyze([*quotes, future, delayed], at)["ev"] == baseline
