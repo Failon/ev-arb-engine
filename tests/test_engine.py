@@ -250,9 +250,7 @@ def test_future_and_superseded_prices_do_not_change_reference_diagnostics(quotes
 
 
 def test_three_way_reference_diagnostics(quotes, at):
-    market = quotes[0].market.model_copy(
-        update={"outcomes": ("home", "draw", "away")}
-    )
+    market = quotes[0].market.model_copy(update={"outcomes": ("home", "draw", "away")})
     prices = ((2.5, 3.2, 3.1), (2.8, 3.0, 2.9), (2.6, 3.4, 2.7))
     three_way_quotes = [
         q.model_copy(
