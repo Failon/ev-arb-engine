@@ -8,5 +8,14 @@
   "max_age": 30,
   "papi_books": {},
   "odds_books": {},
-  "papi_market": null
+  "papi_market": {
+    "market_id": "101",
+    "sport_id": 10,
+    "outcome_ids": {
+      "home": "101",
+      "draw": "102",
+      "away": "103"
+    },
+    "evidence": "Authenticated OddsPapi /v4/markets checked 2026-11-17: sportId=10, marketId=101, marketType=1x2, period=fulltime, handicap=0, playerProp=false; https://oddspapi.io/en/docs/get-markets"
+  }
 }

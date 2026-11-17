@@ -65,6 +65,36 @@ def normalize_papi(
         or payload.get("hasOdds") is not True
     ):
         return [], {**health, "status": "not_supported_prematch"}
+    change_ages = []
+    for board in payload.get("bookmakerOdds", {}).values():
+        try:
+            raw = board["markets"][mapping.market_id]
+            if not (
+                board.get("bookmakerIsActive") is True
+                and board.get("suspended") is False
+                and raw.get("marketActive") is True
+                and set(raw["outcomes"]) == set(mapping.outcome_ids.values())
+            ):
+                continue
+            players = [raw["outcomes"][oid]["players"]["0"] for oid in mapping.outcome_ids.values()]
+            if not all(player.get("active") is True for player in players):
+                continue
+            ages = [
+                (received - STAMP.validate_python(player["changedAt"])).total_seconds()
+                for player in players
+            ]
+            if min(ages) >= 0:
+                change_ages.append(max(ages))
+        except (KeyError, ValueError, TypeError):
+            continue
+    health.update(
+        {
+            "raw_active_complete_boards": len(change_ages),
+            "raw_recent_change_boards_30s": sum(age <= 30 for age in change_ages),
+            "oldest_change_age_min_seconds": min(change_ages, default=None),
+            "oldest_change_age_max_seconds": max(change_ages, default=None),
+        }
+    )
     quotes = []
     for slug, board in payload.get("bookmakerOdds", {}).items():
         if slug not in books:
@@ -116,7 +146,10 @@ def normalize_papi(
             quotes.append(quote)
         except (ValueError, TypeError, KeyError):
             health["rejected_books"][slug] = "invalid_or_unsupported_market"
-    return quotes, {**health, "status": "normalized"}
+    return quotes, {
+        **health,
+        "status": "normalized" if quotes else "book_audit_required_or_rejected",
+    }
 
 
 def normalize_the_odds(
@@ -165,7 +198,7 @@ def normalize_the_odds(
             except (ValueError, TypeError, KeyError):
                 rejected[slug] = "invalid_or_unsupported_market"
     return quotes, {
-        "status": "normalized",
+        "status": "normalized" if quotes else "book_audit_required_or_rejected",
         "raw_books": sorted(raw_books),
         "rejected_books": rejected,
         "timestamp_basis": "provider market last_update",

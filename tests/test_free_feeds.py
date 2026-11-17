@@ -392,3 +392,37 @@ async def test_discovery_cache_shares_budget_with_collection(data, config, tmp_p
         assert trial.feeds["the-odds-api"].spent == 1
         assert trial.report()["window"] is None  # Metadata does not start the 3-day clock.
         trial.close()
+
+
+@pytest.mark.asyncio
+async def test_audits_can_expand_without_extending_deadline_or_resetting_budget(
+    data, config, tmp_path
+):
+    path = str(tmp_path / "audit-revisions.db")
+    initial = TrialConfig()
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler_for(data, []))) as client:
+        trial = Trial(path, initial, client, KEYS)
+        await trial.tick(data["now"])
+        ends = trial.report()["window"]["ends_at"]
+        spent = trial.report()["budgets"]
+        trial.close()
+        trial = Trial(path, config, client, KEYS)
+        assert trial.report()["window"]["ends_at"] == ends
+        assert trial.report()["budgets"] == spent
+        assert trial.db.execute("SELECT COUNT(*) FROM trial_audits").fetchone()[0] == 2
+        assert (await trial.tick(data["now"] + timedelta(minutes=1)))["status"] == "not_due"
+        trial.close()
+        with pytest.raises(ValueError, match="cannot be removed or changed"):
+            Trial(path, initial, client, KEYS)
+        changed = config.model_copy(update={"papi_market": None})
+        with pytest.raises(ValueError, match="market audit cannot change"):
+            Trial(path, changed, client, KEYS)
+
+
+def test_raw_change_age_metrics_do_not_enable_unaudited_quotes(data, config):
+    quotes, health = normalize_papi(data["papi"], data["now"], {}, config.papi_market)
+    assert not quotes
+    assert health["status"] == "book_audit_required_or_rejected"
+    assert health["raw_active_complete_boards"] == 3
+    assert health["raw_recent_change_boards_30s"] == 3
+    assert health["oldest_change_age_min_seconds"] >= 0

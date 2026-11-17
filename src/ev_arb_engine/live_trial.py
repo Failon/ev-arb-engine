@@ -47,6 +47,13 @@ class TrialConfig(StrictModel):
     papi_market: PapiMarket | None = None
 
 
+AUDIT_FIELDS = {"papi_books", "odds_books", "papi_market"}
+
+
+def schedule_hash(config):
+    return fingerprint(config.model_dump(mode="json", exclude=AUDIT_FIELDS))
+
+
 class Trial:
     def __init__(
         self, db_path: str, config: TrialConfig, client: httpx.AsyncClient, keys: dict[str, str]
@@ -73,12 +80,33 @@ class Trial:
             self.db.execute(
                 "CREATE TABLE IF NOT EXISTS trial_cache (key TEXT PRIMARY KEY, at TEXT, payload TEXT)"
             )
+            self.db.execute(
+                "CREATE TABLE IF NOT EXISTS trial_audits (hash TEXT PRIMARY KEY, accepted_at TEXT, payload TEXT)"
+            )
             self.db.commit()
             saved = self.db.execute("SELECT config_hash FROM trial WHERE id=1").fetchone()
-            if saved and saved[0] != fingerprint(config.model_dump(mode="json")):
-                raise ValueError(
-                    "trial configuration is frozen; resume with the original configuration"
-                )
+            if saved and saved[0] not in (
+                schedule_hash(config),
+                fingerprint(config.model_dump(mode="json")),
+            ):
+                raise ValueError("trial schedule/budget configuration is frozen")
+            audit = config.model_dump(mode="json", include=AUDIT_FIELDS)
+            previous = self.db.execute(
+                "SELECT payload FROM trial_audits ORDER BY rowid DESC LIMIT 1"
+            ).fetchone()
+            if previous:
+                original = json.loads(previous[0])
+                for field in ("papi_books", "odds_books"):
+                    if any(
+                        audit[field].get(slug) != book for slug, book in original[field].items()
+                    ):
+                        raise ValueError("accepted book audits cannot be removed or changed")
+                if (
+                    original["papi_market"] is not None
+                    and original["papi_market"] != audit["papi_market"]
+                ):
+                    raise ValueError("accepted market audit cannot change")
+            self.audit_hash = fingerprint(audit)
             self.feeds = {
                 "oddspapi": BudgetHTTP(
                     client, self.db, "oddspapi", keys["oddspapi"], config.papi_budget
@@ -87,6 +115,19 @@ class Trial:
                     client, self.db, "the-odds-api", keys["the-odds-api"], config.odds_budget
                 ),
             }
+            with self.db:
+                if saved:
+                    self.db.execute(
+                        "UPDATE trial SET config_hash=? WHERE id=1", (schedule_hash(config),)
+                    )
+                self.db.execute(
+                    "INSERT OR IGNORE INTO trial_audits VALUES (?, ?, ?)",
+                    (
+                        self.audit_hash,
+                        datetime.now(UTC).isoformat(),
+                        json.dumps(self._clean(audit)),
+                    ),
+                )
         except Exception:
             self.db.close()
             raise
@@ -228,7 +269,7 @@ class Trial:
                 self.db.execute(
                     "INSERT INTO trial VALUES (1,?,?,?,NULL)",
                     (
-                        fingerprint(self.config.model_dump(mode="json")),
+                        schedule_hash(self.config),
                         at.isoformat(),
                         ends.isoformat(),
                     ),
@@ -262,6 +303,7 @@ class Trial:
             return fresh, {
                 **health,
                 "provider": provider,
+                "audit_revision": self.audit_hash,
                 "normalized_count": len(quotes),
                 "fresh_count": len(fresh),
                 "stale_count": len(quotes) - len(fresh),
