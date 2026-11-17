@@ -1,6 +1,7 @@
 import argparse
 import asyncio
 import json
+import sqlite3
 from datetime import datetime
 from pathlib import Path
 
@@ -13,6 +14,10 @@ from .research import analyze
 
 
 async def run(args):
+    if args.command.startswith("live-"):
+        from .live_trial import command
+
+        return await command(args)
     if args.command == "report":
         return report(ReportRequest.model_validate_json(args.fixture.read_text(encoding="utf-8")))
     if args.command == "replay":
@@ -85,9 +90,19 @@ def main():
     )
     alerts.add_argument("--state", default="alerts.db", help="single-bot local state")
     alerts.add_argument("--iterations", type=int, default=1)
+    for name in ("live-check", "live-discover", "live-run", "live-report"):
+        live = sub.add_parser(name)
+        live.add_argument("--db", type=Path, default=Path("live-trial.db"))
+        live.add_argument("--config", type=Path)
+        live.add_argument("--secrets-file", type=Path, default=Path(".env"))
+        live.add_argument("--once", action="store_true", help="one due sample only")
     args = parser.parse_args()
     try:
         print(json.dumps(asyncio.run(run(args)), indent=2, ensure_ascii=False, allow_nan=False))
+    except sqlite3.Error:
+        parser.exit(2, "error: local trial database unavailable; check path and permissions\n")
+    except KeyboardInterrupt:
+        parser.exit(0, "research collection stopped; state saved\n")
     except (ValueError, OSError) as exc:
         parser.exit(2, f"error: {exc}\n")
 

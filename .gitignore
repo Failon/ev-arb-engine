@@ -11,3 +11,7 @@ build/
 .env.*
 CONTEXT_REVIEW.md
 
+
+*.db-*
+/live-discovery.json
+/live-report.json

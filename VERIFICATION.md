@@ -62,3 +62,22 @@ commands, polling cursor, persistent dedup, material changes, cooldown/hourly qu
 bounded queue and missing-secret errors. No actual Telegram message was sent.
 Real-feed notifications remain disabled pending #5 authenticated data and licence
 verification; this delivers the explicitly labelled synthetic demo path only.
+
+## OddsPapi + The Odds API free live-data pilot (#13)
+
+Added quota-bounded read-only HTTP, OddsPapi V4 parsing and a separate live trial
+CLI reusing The Odds API normalization. 125 passed, 1 skipped; Ruff lint/format
+passed. The complete synthetic 72-hour schedule used 84 OddsPapi requests and
+72 The Odds API requests, with identical snapshots deduplicated. Tests include
+budget/cooldown persistence, 401/403/429/302/500 and transport failure isolation,
+request-credit headers, late/future/old outcome-change timestamps, unknown audits,
+unsupported sports/player/exchange outcomes, duplicate original-book identities,
+changed fixture metadata, safe local secret loading, offline reporting and frozen
+trial deadlines/configuration. Metadata discovery caches and shares the same caps.
+
+Local live-check: both API keys absent, network_requests=0. User has no provider
+accounts yet. No authenticated live requests, three-day deployment, paper fills,
+real wagers or Telegram sends were performed. Settlement/market/book edition audits
+must be completed from actual discovery before EV signals are enabled; default
+configuration only collects inventory. PostgreSQL remains skipped without DSN.
+Public provider docs/terms were read; systemd template was not installed/tested.
