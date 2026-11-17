@@ -2,7 +2,7 @@ from datetime import datetime
 
 from .arbitrage import ExecutionScenario, scan, simulate
 from .models import Quote, require_compatible
-from .pricing import consensus, conservative_ev
+from .pricing import consensus, conservative_ev, devig
 
 
 def analyze(quotes: list[Quote], at: datetime, budget: float = 100) -> dict:
@@ -12,19 +12,39 @@ def analyze(quotes: list[Quote], at: datetime, budget: float = 100) -> dict:
     for q in sorted(quotes, key=lambda q: (q.observed_at, q.received_at)):
         if q.available(at, 30):
             latest[q.source] = q
-    fresh = list(latest.values())
+    # Stable order: delayed snapshots must not reshuffle the API response.
+    fresh = [latest[source] for source in sorted(latest)]
     if len(fresh) < 3:
         raise ValueError("need three fresh sources for leave-one-source-out consensus")
     edges = []
     for q in fresh:
         fair = consensus(fresh, q.source)
+        references = [ref for ref in fresh if ref.source != q.source]
+        reference_probs = [
+            dict(
+                zip(
+                    (o.name for o in ref.outcomes),
+                    devig([o.odds for o in ref.outcomes], "power"),
+                )
+            )
+            for ref in references
+        ]
         for outcome in q.outcomes:
+            estimates = [prob[outcome.name] for prob in reference_probs]
+            minimum = min(estimates)
             edges.append(
                 {
                     "source": q.source,
                     "outcome": outcome.name,
                     "fair_probability": fair[outcome.name],
                     "conservative_ev": conservative_ev(outcome, fair[outcome.name]),
+                    "reference_count": len(estimates),
+                    "reference_probability_min": minimum,
+                    "reference_probability_max": max(estimates),
+                    "min_reference_conservative_ev": conservative_ev(outcome, minimum),
+                    "references_agree_on_positive_ev": all(
+                        conservative_ev(outcome, probability) > 0 for probability in estimates
+                    ),
                 }
             )
     plan = scan(fresh, at, budget)
