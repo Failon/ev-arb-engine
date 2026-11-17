@@ -173,3 +173,33 @@ async def test_api(quotes, at):
         payload["budget"] = -1
         assert (await client.post("/analyze", json=payload)).status_code == 422
     assert analyze(quotes, at)["arbitrage"]["worst_profit"] > 0
+
+
+def test_reference_disagreement_diagnostics(quotes, at):
+    # A distorted reference must appear in the probability range, not be
+    # silently hidden by the consensus average.
+    baseline = analyze(quotes, at)
+    candidate = baseline["ev"][0]
+    assert candidate["reference_count"] == len(quotes) - 1
+    assert candidate["reference_probability_min"] <= candidate["fair_probability"]
+    assert candidate["fair_probability"] <= candidate["reference_probability_max"]
+    assert candidate["min_reference_conservative_ev"] <= candidate["conservative_ev"]
+    assert isinstance(candidate["references_agree_on_positive_ev"], bool)
+
+    source = quotes[1]
+    altered = source.model_copy(
+        update={
+            "outcomes": tuple(
+                o.model_copy(update={"odds": (1.15 if i == 0 else 12.0)})
+                for i, o in enumerate(source.outcomes)
+            )
+        }
+    )
+    changed = analyze([quotes[0], altered, *quotes[2:]], at)
+    edge = next(
+        x for x in changed["ev"]
+        if x["source"] == quotes[0].source and x["outcome"] == quotes[0].outcomes[0].name
+    )
+    assert edge["reference_probability_min"] < edge["reference_probability_max"]
+    assert edge["reference_count"] == len(quotes) - 1
+    assert edge["min_reference_conservative_ev"] <= edge["conservative_ev"]
