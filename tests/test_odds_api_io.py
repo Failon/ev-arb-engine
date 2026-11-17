@@ -107,9 +107,11 @@ async def test_http_failures_do_not_leak_keys(status, rules, tmp_path):
         return httpx.Response(status, text="secret from remote provider")
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
-        with Journal(tmp_path / "quotes.db") as journal:
-            with pytest.raises(RuntimeError, match=f"HTTP {status}") as exc:
-                await collector(client, journal, rules).collect()
+        with (
+            Journal(tmp_path / "quotes.db") as journal,
+            pytest.raises(RuntimeError, match=f"HTTP {status}") as exc,
+        ):
+            await collector(client, journal, rules).collect()
     assert "synthetic-test-key" not in str(exc.value)
     assert "secret from remote provider" not in str(exc.value)
 
@@ -120,7 +122,9 @@ async def test_transport_failure_has_safe_error(rules, tmp_path):
         raise httpx.ConnectError("secret URL or token", request=request)
 
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
-        with Journal(tmp_path / "quotes.db") as journal:
-            with pytest.raises(RuntimeError, match="transport failure") as exc:
-                await collector(client, journal, rules).collect()
+        with (
+            Journal(tmp_path / "quotes.db") as journal,
+            pytest.raises(RuntimeError, match="transport failure") as exc,
+        ):
+            await collector(client, journal, rules).collect()
     assert "secret" not in str(exc.value)
