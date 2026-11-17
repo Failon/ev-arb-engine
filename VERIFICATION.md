@@ -51,3 +51,14 @@ strict market grouping, two-book arb versus three-book EV, persistent reserves,
 win/loss/void and idempotent/conflicting settlement. Real feeds remain unverified;
 no real provider/Telegram requests, PostgreSQL skipped. Paper execution is an
 instantaneous scenario; latency/CLV remain in the existing historical replay.
+
+## Telegram synthetic demo (#6)
+
+101 passed, 1 skipped; Ruff lint and formatting passed. CLI alerts-demo produced
+3 local synthetic message previews without credentials or network. MockTransport
+covers success, 401/500/302, transport errors, short/long 429 retry-after, freshness
+on retry, filters, conflicting markets, modified EV, real-data refusal, allowed-chat
+commands, polling cursor, persistent dedup, material changes, cooldown/hourly quota,
+bounded queue and missing-secret errors. No actual Telegram message was sent.
+Real-feed notifications remain disabled pending #5 authenticated data and licence
+verification; this delivers the explicitly labelled synthetic demo path only.
