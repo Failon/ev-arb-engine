@@ -58,9 +58,7 @@ class OddsAPIIOCollector:
             # Request objects and URLs can contain API secrets: never log or expose them.
             raise RuntimeError("Odds-API.io transport failure; no retry performed") from None
         if response.status_code != 200:
-            raise RuntimeError(
-                f"Odds-API.io HTTP {response.status_code}; no retry performed"
-            )
+            raise RuntimeError(f"Odds-API.io HTTP {response.status_code}; no retry performed")
         received = datetime.now(UTC)
         payload = response.json()
         self.journal.append("odds-api-io", received, payload)
