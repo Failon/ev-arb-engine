@@ -20,7 +20,12 @@ def analyze(quotes: list[Quote], at: datetime, budget: float = 100) -> dict:
         fair = consensus(fresh, q.source)
         references = [ref for ref in fresh if ref.source != q.source]
         reference_probs = [
-            dict(zip((o.name for o in ref.outcomes), devig([o.odds for o in ref.outcomes], "power")))
+            dict(
+                zip(
+                    (o.name for o in ref.outcomes),
+                    devig([o.odds for o in ref.outcomes], "power"),
+                )
+            )
             for ref in references
         ]
         for outcome in q.outcomes:
