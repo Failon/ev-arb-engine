@@ -128,3 +128,46 @@ async def test_transport_failure_has_safe_error(rules, tmp_path):
         ):
             await collector(client, journal, rules).collect()
     assert "secret" not in str(exc.value)
+
+
+@pytest.mark.parametrize("change", ["live", "past", "future_timestamp", "unknown_market"])
+def test_rejects_unsafe_provider_states(payload, rules, tmp_path, change):
+    received = datetime.now(UTC)
+    if change == "live":
+        payload["status"] = "live"
+    elif change == "past":
+        payload["date"] = (received - timedelta(seconds=1)).isoformat()
+    elif change == "future_timestamp":
+        payload["bookmakers"]["Stake"][0]["updatedAt"] = (
+            received + timedelta(seconds=10)
+        ).isoformat()
+    else:
+        for markets in payload["bookmakers"].values():
+            markets[0]["name"] = "unrecognized"
+    with Journal(str(tmp_path / "quotes.db")) as journal:
+        if change == "unknown_market":
+            assert collector(None, journal, rules).normalize(payload, received) == []
+        else:
+            with pytest.raises(ValueError):
+                collector(None, journal, rules).normalize(payload, received)
+
+
+def test_mismatched_rules_rejected_before_http(rules, tmp_path):
+    rules["Stake"] = rules["Stake"].model_copy(update={"overtime": True})
+    with (
+        Journal(str(tmp_path / "quotes.db")) as journal,
+        pytest.raises(ValueError, match="incompatible"),
+    ):
+        collector(None, journal, rules)
+
+
+@pytest.mark.asyncio
+async def test_successful_provider_echo_does_not_journal_api_key(payload, rules, tmp_path):
+    payload["debug"] = "synthetic-test-key"
+    db = tmp_path / "quotes.db"
+    async with httpx.AsyncClient(
+        transport=httpx.MockTransport(lambda r: httpx.Response(200, json=payload))
+    ) as client:
+        with Journal(str(db)) as journal:
+            assert len(await collector(client, journal, rules).collect()) == 2
+    assert b"synthetic-test-key" not in db.read_bytes()

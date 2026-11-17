@@ -34,3 +34,10 @@ an exactly fair candidate positive. Normalize the solved probability vector by
 its accurately summed mass; symmetric references now return exactly 0.5.
 Validation: 58 passed, 1 skipped; Ruff lint and format passed. PostgreSQL remains
 unverified (TEST_POSTGRES_DSN absent). No live provider or Telegram calls.
+
+## PR #7 follow-up: provider validation
+
+79 passed, 1 skipped; Ruff lint and formatting pass. Includes the #8 numeric fix,
+audited event/bookmaker mapping, duplicated-reseller consensus regression, changed
+metadata rejection, pre-match/rule validation and successful-response key echo
+redaction. All HTTP is mocked; no live provider subscription or PostgreSQL tested.

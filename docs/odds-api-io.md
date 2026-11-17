@@ -66,3 +66,34 @@ subscription; register audited settlement rules for the two bookmaker versions;
 add source/bookmaker provenance deduplication across multiple aggregators;
 implement documented event discovery with strict ID mapping; measure source
 latency and stale rate. No real-money bet-placement code is included.
+
+## Follow-up verification, 2026-11-17
+
+Checked public docs/catalogue, not authenticated odds:
+- https://odds-api.io/sportsbooks lists exact API names Stake and Parimatch UK.
+- https://docs.odds-api.io/ documents key-based V3 access and paid plan quotas.
+- https://docs.odds-api.io/guides/best-practices recommends pre-match caching,
+  batching and respecting limits; the adapter makes no automatic retries on 429.
+- https://odds-api.io/terms permits analytical use subject to subscription and
+  restricts redistribution. Public publishing/forwarding of provider quotes is
+  not enabled; verify licence scope before retaining or sharing real payloads.
+- https://docs-odds-data.stake.com/ and https://sportsbook-api.stake.com/ expose
+  official documentation entry points. Their authorization, schema, limits and
+  retention rights have not been validated here; no direct Stake adapter enabled.
+
+`AuditedCollector` in `provenance.py` wraps a provider before multi-provider use.
+Register `EventMapping(external_event, canonical_event, audit_reference)` by exact
+external ID and map every provider source to an original bookmaker/region ID.
+For example, both reseller feeds of Stake must map to the same canonical ID.
+Changed participants, sport or start time reject the entire batch; no fuzzy match.
+The wrapper retains provider/source mapping in its health report; the engine's
+existing one-snapshot-per-source rule then prevents duplicated book references.
+Only audited configuration may establish these identities. Correlation between
+different books remains possible and is not measured by reference count.
+
+The adapter now rejects already-started/in-play events and differing settlement
+rules before analysis. Malformed successful responses expose only a generic error;
+credential echoes are redacted before journaling. No API key or verified live data
+was available. Live feed verification, event discovery and permitted retention are
+still prerequisites for unattended real-data operation. Synthetic demos are safe
+for offline development, but do not establish real coverage, latency or calibration.
