@@ -268,3 +268,47 @@ def test_three_way_reference_diagnostics(quotes, at):
     assert len(result["ev"]) == 9
     assert all(item["reference_count"] == 2 for item in result["ev"])
     assert {item["outcome"] for item in result["ev"]} == {"home", "draw", "away"}
+
+
+@pytest.mark.parametrize("target_odds, positive", [(2.0, False), (1 / 0.48, False), (2.2, True)])
+def test_unanimous_references_and_zero_ev_boundary(quotes, at, target_odds, positive):
+    # Symmetric references have fair p=0.5. At d=1/(0.5-0.02), EV is exactly zero.
+    references = [
+        q.model_copy(
+            update={"outcomes": tuple(o.model_copy(update={"odds": 2.0}) for o in q.outcomes)}
+        )
+        for q in quotes[1:]
+    ]
+    target = quotes[0].model_copy(
+        update={
+            "outcomes": tuple(
+                o.model_copy(update={"odds": target_odds, "commission": 0})
+                for o in quotes[0].outcomes
+            )
+        }
+    )
+    rows = [r for r in analyze([target, *references], at)["ev"] if r["source"] == target.source]
+    for row in rows:
+        assert row["reference_probability_min"] == 0.5
+        assert row["reference_probability_max"] == 0.5
+        assert row["references_agree_on_positive_ev"] is positive
+        assert row["min_reference_conservative_ev"] == row["conservative_ev"]
+        if target_odds == 1 / 0.48:
+            assert row["conservative_ev"] == 0.0
+
+
+def test_repeated_reference_snapshots_do_not_inflate_agreement(quotes, at):
+    baseline = analyze(quotes, at)
+    assert analyze([*quotes, quotes[1], quotes[1]], at) == baseline
+    with pytest.raises(ValueError, match="three fresh sources"):
+        analyze([quotes[0], quotes[1], quotes[1]], at)
+
+
+def test_reference_received_after_cutoff_does_not_affect_diagnostics(quotes, at):
+    late_receipt = quotes[1].model_copy(
+        update={
+            "received_at": at + timedelta(seconds=1),
+            "outcomes": tuple(o.model_copy(update={"odds": 100}) for o in quotes[1].outcomes),
+        }
+    )
+    assert analyze([*quotes, late_receipt], at) == analyze(quotes, at)

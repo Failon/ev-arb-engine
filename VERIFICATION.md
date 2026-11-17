@@ -24,3 +24,13 @@
 Ограничение среды проверки: Windows asyncio требует локальный socketpair;
 в sandbox создание loop зависает, вне sandbox офлайн тесты проходят за ~1 секунду.
 Зависимости закреплены в uv.lock. Подробные ограничения моделей приведены в README.
+
+## PR #2 follow-up: numeric boundary audit (2026-11-17)
+
+Baseline 9944649: 53 passed, 1 skipped. Added unanimous positive/negative/zero EV,
+repeated snapshots and late receipt regressions. The zero case exposed power-devig
+root roundoff (0.5000000000000001 for symmetric references), incorrectly making
+an exactly fair candidate positive. Normalize the solved probability vector by
+its accurately summed mass; symmetric references now return exactly 0.5.
+Validation: 58 passed, 1 skipped; Ruff lint and format passed. PostgreSQL remains
+unverified (TEST_POSTGRES_DSN absent). No live provider or Telegram calls.
