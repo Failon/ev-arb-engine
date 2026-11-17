@@ -1,0 +1,8 @@
+{
+  "initial_balance": 1000,
+  "observations": [
+    {"event_id": "demo-1", "settled_at": "2026-01-01T18:00:00Z", "stake": 10, "profit": 8, "clv": 0.02},
+    {"event_id": "demo-2", "settled_at": "2026-01-02T18:00:00Z", "stake": 10, "profit": -10, "clv": -0.01},
+    {"event_id": "demo-3", "settled_at": "2026-01-03T18:00:00Z", "stake": 20, "profit": 5, "clv": 0.005}
+  ]
+}

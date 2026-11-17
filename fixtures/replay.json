@@ -1,0 +1,1993 @@
+{
+  "events": [
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:1",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-01T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-01T12:00:00Z",
+          "received_at": "2026-01-01T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:1",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-01T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-01T12:00:00Z",
+          "received_at": "2026-01-01T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:1",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-01T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-01T12:00:00Z",
+          "received_at": "2026-01-01T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:1",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-01T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-01T14:59:50Z",
+          "received_at": "2026-01-01T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:1",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-01T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-01T14:59:50Z",
+          "received_at": "2026-01-01T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:1",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-01T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-01T14:59:50Z",
+          "received_at": "2026-01-01T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-01T12:00:01Z",
+      "closing_at": "2026-01-01T14:59:59Z",
+      "settled_at": "2026-01-01T18:00:00Z",
+      "winner": "home"
+    },
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:2",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-02T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-02T12:00:00Z",
+          "received_at": "2026-01-02T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:2",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-02T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-02T12:00:00Z",
+          "received_at": "2026-01-02T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:2",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-02T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-02T12:00:00Z",
+          "received_at": "2026-01-02T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:2",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-02T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-02T14:59:50Z",
+          "received_at": "2026-01-02T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:2",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-02T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-02T14:59:50Z",
+          "received_at": "2026-01-02T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:2",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-02T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-02T14:59:50Z",
+          "received_at": "2026-01-02T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-02T12:00:01Z",
+      "closing_at": "2026-01-02T14:59:59Z",
+      "settled_at": "2026-01-02T18:00:00Z",
+      "winner": "home"
+    },
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:3",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-03T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-03T12:00:00Z",
+          "received_at": "2026-01-03T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:3",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-03T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-03T12:00:00Z",
+          "received_at": "2026-01-03T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:3",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-03T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-03T12:00:00Z",
+          "received_at": "2026-01-03T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:3",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-03T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-03T14:59:50Z",
+          "received_at": "2026-01-03T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:3",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-03T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-03T14:59:50Z",
+          "received_at": "2026-01-03T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:3",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-03T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-03T14:59:50Z",
+          "received_at": "2026-01-03T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-03T12:00:01Z",
+      "closing_at": "2026-01-03T14:59:59Z",
+      "settled_at": "2026-01-03T18:00:00Z",
+      "winner": "away"
+    },
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:4",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-04T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-04T12:00:00Z",
+          "received_at": "2026-01-04T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:4",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-04T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-04T12:00:00Z",
+          "received_at": "2026-01-04T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:4",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-04T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-04T12:00:00Z",
+          "received_at": "2026-01-04T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:4",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-04T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-04T14:59:50Z",
+          "received_at": "2026-01-04T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:4",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-04T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-04T14:59:50Z",
+          "received_at": "2026-01-04T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:4",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-04T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-04T14:59:50Z",
+          "received_at": "2026-01-04T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-04T12:00:01Z",
+      "closing_at": "2026-01-04T14:59:59Z",
+      "settled_at": "2026-01-04T18:00:00Z",
+      "winner": "home"
+    },
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:5",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-05T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-05T12:00:00Z",
+          "received_at": "2026-01-05T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:5",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-05T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-05T12:00:00Z",
+          "received_at": "2026-01-05T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:5",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-05T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-05T12:00:00Z",
+          "received_at": "2026-01-05T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:5",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-05T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-05T14:59:50Z",
+          "received_at": "2026-01-05T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:5",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-05T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-05T14:59:50Z",
+          "received_at": "2026-01-05T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:5",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-05T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-05T14:59:50Z",
+          "received_at": "2026-01-05T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-05T12:00:01Z",
+      "closing_at": "2026-01-05T14:59:59Z",
+      "settled_at": "2026-01-05T18:00:00Z",
+      "winner": "home"
+    },
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:6",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-06T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-06T12:00:00Z",
+          "received_at": "2026-01-06T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:6",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-06T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-06T12:00:00Z",
+          "received_at": "2026-01-06T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:6",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-06T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-06T12:00:00Z",
+          "received_at": "2026-01-06T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:6",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-06T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-06T14:59:50Z",
+          "received_at": "2026-01-06T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:6",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-06T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-06T14:59:50Z",
+          "received_at": "2026-01-06T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:6",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-06T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-06T14:59:50Z",
+          "received_at": "2026-01-06T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-06T12:00:01Z",
+      "closing_at": "2026-01-06T14:59:59Z",
+      "settled_at": "2026-01-06T18:00:00Z",
+      "winner": "away"
+    },
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:7",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-07T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-07T12:00:00Z",
+          "received_at": "2026-01-07T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:7",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-07T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-07T12:00:00Z",
+          "received_at": "2026-01-07T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:7",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-07T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-07T12:00:00Z",
+          "received_at": "2026-01-07T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:7",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-07T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-07T14:59:50Z",
+          "received_at": "2026-01-07T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:7",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-07T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-07T14:59:50Z",
+          "received_at": "2026-01-07T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:7",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-07T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-07T14:59:50Z",
+          "received_at": "2026-01-07T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-07T12:00:01Z",
+      "closing_at": "2026-01-07T14:59:59Z",
+      "settled_at": "2026-01-07T18:00:00Z",
+      "winner": "home"
+    },
+    {
+      "quotes": [
+        {
+          "market": {
+            "event": {
+              "id": "replay:8",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-08T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-08T12:00:00Z",
+          "received_at": "2026-01-08T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 2.2,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:8",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-08T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-08T12:00:00Z",
+          "received_at": "2026-01-08T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.2,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:8",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-08T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-08T12:00:00Z",
+          "received_at": "2026-01-08T12:00:00Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 1.95,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:8",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-08T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_a",
+          "observed_at": "2026-01-08T14:59:50Z",
+          "received_at": "2026-01-08T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:8",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-08T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "book_b",
+          "observed_at": "2026-01-08T14:59:50Z",
+          "received_at": "2026-01-08T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0.02,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0.02,
+              "liquidity": 200
+            }
+          ]
+        },
+        {
+          "market": {
+            "event": {
+              "id": "replay:8",
+              "sport": "tennis",
+              "home": "Player A",
+              "away": "Player B",
+              "starts_at": "2026-01-08T15:00:00Z"
+            },
+            "kind": "moneyline",
+            "period": "full",
+            "outcomes": [
+              "home",
+              "away"
+            ],
+            "rules": {
+              "ruleset": "demo-completed-match-v1",
+              "overtime": false,
+              "abandonment": "void",
+              "push": "impossible"
+            }
+          },
+          "source": "reference_c",
+          "observed_at": "2026-01-08T14:59:50Z",
+          "received_at": "2026-01-08T14:59:50Z",
+          "outcomes": [
+            {
+              "name": "home",
+              "odds": 1.8,
+              "commission": 0,
+              "liquidity": 200
+            },
+            {
+              "name": "away",
+              "odds": 2.1,
+              "commission": 0,
+              "liquidity": 200
+            }
+          ]
+        }
+      ],
+      "decided_at": "2026-01-08T12:00:01Z",
+      "closing_at": "2026-01-08T14:59:59Z",
+      "settled_at": "2026-01-08T18:00:00Z",
+      "winner": "home"
+    }
+  ],
+  "boundaries": [
+    "2026-01-04T00:00:00Z",
+    "2026-01-06T00:00:00Z",
+    "2026-01-09T00:00:00Z"
+  ]
+}

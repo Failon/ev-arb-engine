@@ -1,0 +1,122 @@
+[
+  {
+    "market": {
+      "event": {
+        "id": "fixture:tennis:001",
+        "sport": "tennis",
+        "home": "Player A",
+        "away": "Player B",
+        "starts_at": "2026-01-10T15:00:00Z"
+      },
+      "kind": "moneyline",
+      "period": "full",
+      "outcomes": [
+        "home",
+        "away"
+      ],
+      "rules": {
+        "ruleset": "demo-completed-match-v1",
+        "overtime": false,
+        "abandonment": "void",
+        "push": "impossible"
+      }
+    },
+    "source": "book_a",
+    "observed_at": "2026-01-10T12:00:00Z",
+    "received_at": "2026-01-10T12:00:01Z",
+    "outcomes": [
+      {
+        "name": "home",
+        "odds": 2.2,
+        "commission": 0,
+        "liquidity": 200
+      },
+      {
+        "name": "away",
+        "odds": 1.8,
+        "commission": 0,
+        "liquidity": 200
+      }
+    ]
+  },
+  {
+    "market": {
+      "event": {
+        "id": "fixture:tennis:001",
+        "sport": "tennis",
+        "home": "Player A",
+        "away": "Player B",
+        "starts_at": "2026-01-10T15:00:00Z"
+      },
+      "kind": "moneyline",
+      "period": "full",
+      "outcomes": [
+        "home",
+        "away"
+      ],
+      "rules": {
+        "ruleset": "demo-completed-match-v1",
+        "overtime": false,
+        "abandonment": "void",
+        "push": "impossible"
+      }
+    },
+    "source": "book_b",
+    "observed_at": "2026-01-10T12:00:00Z",
+    "received_at": "2026-01-10T12:00:01Z",
+    "outcomes": [
+      {
+        "name": "home",
+        "odds": 1.8,
+        "commission": 0.02,
+        "liquidity": 200
+      },
+      {
+        "name": "away",
+        "odds": 2.2,
+        "commission": 0.02,
+        "liquidity": 200
+      }
+    ]
+  },
+  {
+    "market": {
+      "event": {
+        "id": "fixture:tennis:001",
+        "sport": "tennis",
+        "home": "Player A",
+        "away": "Player B",
+        "starts_at": "2026-01-10T15:00:00Z"
+      },
+      "kind": "moneyline",
+      "period": "full",
+      "outcomes": [
+        "home",
+        "away"
+      ],
+      "rules": {
+        "ruleset": "demo-completed-match-v1",
+        "overtime": false,
+        "abandonment": "void",
+        "push": "impossible"
+      }
+    },
+    "source": "reference_c",
+    "observed_at": "2026-01-10T12:00:00Z",
+    "received_at": "2026-01-10T12:00:01Z",
+    "outcomes": [
+      {
+        "name": "home",
+        "odds": 1.95,
+        "commission": 0,
+        "liquidity": 200
+      },
+      {
+        "name": "away",
+        "odds": 1.95,
+        "commission": 0,
+        "liquidity": 200
+      }
+    ]
+  }
+]

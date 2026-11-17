@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EV-Arb Engine · Исследования</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0c1423;color:#e5edf9}
+body{max-width:1100px;margin:0 auto;padding:40px 24px}header{border-bottom:1px solid #30405b;padding-bottom:24px}
+h1{font-size:36px;margin:8px 0}h2{font-size:20px}p{color:#b8c7db;line-height:1.6}.tag{color:#76dfc4;font-size:13px;letter-spacing:2px}
+section{margin-top:24px;background:#142137;border:1px solid #30405b;border-radius:12px;padding:24px}
+button,input{font:inherit}button{background:#76dfc4;color:#102533;border:0;border-radius:6px;padding:10px 18px;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}input{max-width:100%;margin:12px 0}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.card{background:#0c1423;padding:18px;border-radius:8px}.value{font-size:26px;display:block;margin-top:8px}.label{color:#b8c7db;font-size:14px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 8px;border-bottom:1px solid #30405b}.scroll{overflow:auto}
+#status{min-height:24px}a{color:#76dfc4}svg{width:100%;height:200px}pre{white-space:pre-wrap;font-size:12px}details{margin-top:20px}
+</style>
+<header><span class="tag">OFFLINE RESEARCH</span><h1>EV-Arb Engine</h1>
+<p>Исторические эксперименты и виртуальное исполнение. Панель показывает завершённые результаты, без текущих сигналов и реальных ставок.</p></header>
+<section><h2>Загрузить результаты</h2><p>JSON с полями observations и initial_balance. Одна строка на событие: event_id, settled_at, stake, profit и необязательный clv.</p>
+<input id="file" type="file" accept="application/json,.json" aria-label="Исторический JSON-отчёт">
+<button id="demo">Синтетический пример</button> <button id="download" disabled>Скачать отчёт</button>
+<p id="status" role="status" aria-live="polite">Выберите файл или откройте пример.</p></section>
+<section id="results" hidden><h2>Итоги эксперимента</h2><div id="cards" class="cards"></div>
+<h2>Баланс после расчёта событий</h2><svg id="chart" viewBox="0 0 1000 200" role="img" aria-label="Исторический баланс"></svg>
+<p id="interval"></p><p>Интервал bootstrap описывает неопределённость исторической выборки при допущении независимости событий. Это не прогноз доходности. Небольшая выборка ненадёжна.</p>
+<div class="scroll"><table><thead><tr><th>Дата расчёта</th><th>Баланс</th><th>Просадка</th></tr></thead><tbody id="rows"></tbody></table></div>
+<details><summary>Полный JSON и ограничения</summary><pre id="json"></pre></details></section>
+<p><a href="/docs">Документация API</a> · Все суммы — в одной условной валюте. Открытые позиции в график не включены.</p>
+<script>
+const el=id=>document.getElementById(id);let current=null;
+const fmt=n=>n===null?'Нет данных':Number(n).toLocaleString('ru-RU',{maximumFractionDigits:2});
+const pct=n=>n===null?'Нет данных':fmt(n*100)+'%';
+async function calculate(payload){
+ el('status').textContent='Расчёт…';el('demo').disabled=true;el('file').disabled=true;el('download').disabled=true;el('results').hidden=true;current=null;
+ try{const response=await fetch('/reports',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+ if(!response.ok){const error=await response.json();throw new Error(JSON.stringify(error.detail||error));}
+ current=await response.json();render(current);el('status').textContent='Готово. Только исторические результаты.';el('download').disabled=false;
+ }catch(e){el('status').textContent='Ошибка: '+e.message;}finally{el('demo').disabled=false;el('file').disabled=false;}}
+function render(r){el('results').hidden=false;el('cards').replaceChildren();
+ for(const [name,value] of [['События',fmt(r.events)],['ROI',pct(r.roi)],['Прибыль',fmt(r.profit)],['Макс. просадка',pct(r.max_drawdown_fraction)],['Средний CLV',pct(r.mean_clv)]]){
+ const card=document.createElement('div');card.className='card';const label=document.createElement('span');label.className='label';label.textContent=name;
+ const number=document.createElement('strong');number.className='value';number.textContent=value;card.append(label,number);el('cards').append(card);}
+ el('interval').textContent='95% bootstrap-интервал ROI: '+(r.roi_bootstrap_95?r.roi_bootstrap_95.map(pct).join(' … '):'Недостаточно наблюдений');
+ el('rows').replaceChildren();for(const row of r.equity_curve){const tr=document.createElement('tr');for(const value of [row.settled_at,fmt(row.balance),fmt(row.drawdown)]){const td=document.createElement('td');td.textContent=value;tr.append(td);}el('rows').append(tr);}
+ const balances=[r.initial_balance,...r.equity_curve.map(x=>x.balance)];const low=Math.min(...balances),high=Math.max(...balances);el('chart').replaceChildren();
+ const line=document.createElementNS('http://www.w3.org/2000/svg','polyline');line.setAttribute('points',balances.map((v,i)=>`${20+i*960/Math.max(1,balances.length-1)},${180-(v-low)*160/(high-low||1)}`).join(' '));line.setAttribute('fill','none');line.setAttribute('stroke','#76dfc4');line.setAttribute('stroke-width','3');el('chart').append(line);
+ el('json').textContent=JSON.stringify(r,null,2);}
+el('demo').onclick=()=>calculate({initial_balance:1000,observations:[
+{event_id:'demo-1',settled_at:'2026-01-01T18:00:00Z',stake:10,profit:8,clv:0.02},
+{event_id:'demo-2',settled_at:'2026-01-02T18:00:00Z',stake:10,profit:-10,clv:-0.01},
+{event_id:'demo-3',settled_at:'2026-01-03T18:00:00Z',stake:20,profit:5,clv:0.005}]});
+el('file').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2000000)throw new Error('Максимум 2 МБ');await calculate(JSON.parse(await file.text()));}catch(error){current=null;el('results').hidden=true;el('download').disabled=true;el('status').textContent='Ошибка файла: '+error.message;}};
+el('download').onclick=()=>{if(!current)return;const url=URL.createObjectURL(new Blob([JSON.stringify(current,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='historical-report.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+</script></html>

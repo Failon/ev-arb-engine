@@ -1,0 +1,30 @@
+[
+  {
+    "id": "001",
+    "sport_key": "tennis",
+    "home_team": "Player A",
+    "away_team": "Player B",
+    "commence_time": "2026-01-10T15:00:00Z",
+    "bookmakers": [
+      {
+        "key": "book_a",
+        "last_update": "2026-01-10T12:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Player A",
+                "price": 2.2
+              },
+              {
+                "name": "Player B",
+                "price": 1.8
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
