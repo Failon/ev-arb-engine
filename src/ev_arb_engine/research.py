@@ -12,7 +12,8 @@ def analyze(quotes: list[Quote], at: datetime, budget: float = 100) -> dict:
     for q in sorted(quotes, key=lambda q: (q.observed_at, q.received_at)):
         if q.available(at, 30):
             latest[q.source] = q
-    fresh = list(latest.values())
+    # Stable order: delayed snapshots must not reshuffle the API response.
+    fresh = [latest[source] for source in sorted(latest)]
     if len(fresh) < 3:
         raise ValueError("need three fresh sources for leave-one-source-out consensus")
     edges = []
