@@ -197,7 +197,8 @@ def test_reference_disagreement_diagnostics(quotes, at):
     )
     changed = analyze([quotes[0], altered, *quotes[2:]], at)
     edge = next(
-        x for x in changed["ev"]
+        x
+        for x in changed["ev"]
         if x["source"] == quotes[0].source and x["outcome"] == quotes[0].outcomes[0].name
     )
     assert edge["reference_probability_min"] < edge["reference_probability_max"]
@@ -212,7 +213,8 @@ def test_reference_diagnostics_match_individual_devigged_sources(quotes, at):
     probabilities = [devig([o.odds for o in q.outcomes], "power") for q in references]
     for index, outcome in enumerate(target.outcomes):
         edge = next(
-            row for row in results["ev"]
+            row
+            for row in results["ev"]
             if row["source"] == target.source and row["outcome"] == outcome.name
         )
         values = [p[index] for p in probabilities]
