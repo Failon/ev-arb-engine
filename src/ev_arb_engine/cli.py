@@ -23,6 +23,12 @@ async def run(args):
             [ResearchTrade.model_validate(t) for t in data["trades"]],
             [datetime.fromisoformat(t) for t in data["boundaries"]],
         )
+    if args.command == "alerts-demo":
+        from .telegram_demo import demo
+
+        return await demo(
+            args.fixture, send=args.send, state_path=args.state, iterations=args.iterations
+        )
     if args.command == "scan-demo":
         from .paper import PaperLedger
         from .scanner import FeedSlot, ScanConfig, Scanner
@@ -72,6 +78,13 @@ def main():
     scan_demo = sub.add_parser("scan-demo")
     scan_demo.add_argument("fixture", type=Path)
     scan_demo.add_argument("--ledger", default=":memory:", help="local paper-only SQLite ledger")
+    alerts = sub.add_parser("alerts-demo")
+    alerts.add_argument("fixture", type=Path)
+    alerts.add_argument(
+        "--send", action="store_true", help="opt in to actual synthetic Telegram messages"
+    )
+    alerts.add_argument("--state", default="alerts.db", help="single-bot local state")
+    alerts.add_argument("--iterations", type=int, default=1)
     args = parser.parse_args()
     try:
         print(json.dumps(asyncio.run(run(args)), indent=2, ensure_ascii=False, allow_nan=False))
